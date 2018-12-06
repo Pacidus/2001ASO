@@ -1,5 +1,5 @@
 # 2001ASO
-A game developed by an undergraduate student for a project in numerical physics at the Sorbonne University.
+A game developed by a team of undergraduate student for a project in numerical physics at the Sorbonne University.
 
 ===================================================================================================================================
                                                 2001 A Space Odyssey
