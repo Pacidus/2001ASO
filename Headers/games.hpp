@@ -221,7 +221,6 @@ void Game0(RenderWindow& window)
   S(3,9) = ((S(3,4)-S(3,3))*7)+S(3,3);
   M << 1.9891e30, 3.3011e23, 4.8685e24, 5.9736e24, 7.3477e22, 6.4185e23, 1.8986e27,5.6846e26,8.6810e25, 419.725;
 
-
   Import(M,S);
   SpeedOM(M, S);
   CenterOM(M, S);
