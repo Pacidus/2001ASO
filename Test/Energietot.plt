@@ -8,7 +8,7 @@ M2 = 1.8986*10**30
 G = 6.674*10**-11
 plot "SolarT.dat" u 0:($0==0?(E0=(-G*M1*M2/sqrt(($6-$7)*($6-$7)+($8-$9)*($8-$9)))+((M1*($2*$2+$4*$4))+(M2*($3*$3+$5*$5)))/2):$1)
 unset table
-E0 = E0
+E0 = abs(E0)
 
 set terminal pdf size 1900/70,1080/70
 set output 'Energietot.pdf'
@@ -21,8 +21,8 @@ plot "SolarT.dat" u ($1/365.25): ((M1*($2*$2+$4*$4))+(M2*($3*$3+$5*$5)))/2 title
 "SolarT.dat" u ($1/365.25): (-G*M1*M2/sqrt(($6-$7)*($6-$7)+($8-$9)*($8-$9))) title "Énergie potentielle",\
 "SolarT.dat" u ($1/365.25): (-G*M1*M2/sqrt(($6-$7)*($6-$7)+($8-$9)*($8-$9)))+((M1*($2*$2+$4*$4))+(M2*($3*$3+$5*$5)))/2 title "Énergie totale"
 
-plot "SolarT.dat" u ($1/365.25): ((-G*M1*M2/sqrt(($6-$7)*($6-$7)+($8-$9)*($8-$9)))+((M1*($2*$2+$4*$4))+(M2*($3*$3+$5*$5)))/2) title "Énergie totale" w l
+plot "SolarT.dat" u ($1/365.25): ((-G*M1*M2/sqrt(($6-$7)*($6-$7)+($8-$9)*($8-$9)))+((M1*($2*$2+$4*$4))+(M2*($3*$3+$5*$5)))/2) title "Dérive de l'énergie totale" w l
 
 set ylabel "Raport de l'énergie par rapport à E_0"
 
-plot "SolarT.dat" u ($1/365.25): ((-G*M1*M2/sqrt(($6-$7)*($6-$7)+($8-$9)*($8-$9)))+((M1*($2*$2+$4*$4))+(M2*($3*$3+$5*$5)))/2)/E0 title "Énergie totale Normalisée" w l
+plot "SolarT.dat" u ($1/365.25): (E0+((-G*M1*M2/sqrt(($6-$7)*($6-$7)+($8-$9)*($8-$9)))+((M1*($2*$2+$4*$4))+(M2*($3*$3+$5*$5)))/2))/E0 title "Dérive de l'énergie totale Normalisée" w l
