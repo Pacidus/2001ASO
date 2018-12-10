@@ -789,7 +789,7 @@ void Game2(RenderWindow& window,Music& music)
   {
     Prop[i].setFont(Font1);
   }
-  Prop[0].setString("Cree par : Francoit Puel & Yohan Duarte");
+  Prop[0].setString("Cree par : Francois Puel & Yohan Duarte");
   Prop[1].setString("Prochainement, une nouvelle version \n avec des musiques libres de droits");
   Prop[2].setString("===Commandes du jeu===");
   Prop[3].setString("Fleche droite & gauche : angle du vaisseau \n Fleches haut & bas : puissance du propulseur");
