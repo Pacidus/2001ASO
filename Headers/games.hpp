@@ -141,10 +141,10 @@ int CScreen(RenderWindow& window, Sound& sound)
   }
   Prop[0].setString("Space mission mode");
   Prop[1].setString("Free mode");
-  Prop[2].setString("Options");
+  Prop[2].setString("Credits");
   Prop[3].setString(">  Space mission mode");
   Prop[4].setString(">  Free mode");
-  Prop[5].setString(">  Options");
+  Prop[5].setString(">  Credits");
   int SCRWIDTH, SCRHEIGHT;
   SCRWIDTH = window.getSize().x;
   SCRHEIGHT = window.getSize().y;
@@ -252,14 +252,18 @@ void Game0(RenderWindow& window, Music& music)
   Font Font2;
   Font2.loadFromFile("./Assets/EarthOrbiter/earthorbiter.ttf");
 
-  Text text[n], vit, Prop;
+  Text text[n], vit, Prop, Carbu;
   double Acc = 0;
+  double T = 3000;
   vit.setFont(Font2);
   Prop.setFont(Font2);
+  Carbu.setFont(Font2);
   ostringstream speed;
   speed << "vitesse : " << endl << sqrt(S(2,n-1)*S(2,n-1)+S(3,n-1)*S(3,n-1)) << " m/s";
   ostringstream Acce;
   Acce << "Propulseur : " << endl << Acc << " m/s²";
+  ostringstream Carb;
+  Carb << "Carburant : " << endl << T << "Kg";
   for (int i = 0; i < n; i++)
   {
     text[i].setFont(Font2);
@@ -276,13 +280,16 @@ void Game0(RenderWindow& window, Music& music)
   text[9].setString("Vaisseau");
   vit.setString(speed.str().c_str());
   Prop.setString(Acce.str().c_str());
+  Carbu.setString(Carb.str().c_str());
   int SCRWIDTH, SCRHEIGHT;
   SCRWIDTH = window.getSize().x;
   SCRHEIGHT = window.getSize().y;
-  vit.setPosition(SCRWIDTH/2,9*SCRHEIGHT/20);
+  vit.setPosition(SCRWIDTH/2,7*SCRHEIGHT/20);
   vit.setCharacterSize(SCRWIDTH/50);
-  Prop.setPosition(SCRWIDTH/2,11*SCRHEIGHT/20);
+  Prop.setPosition(SCRWIDTH/2,9*SCRHEIGHT/20);
   Prop.setCharacterSize(SCRWIDTH/50);
+  Carbu.setPosition(SCRWIDTH/2,11*SCRHEIGHT/20);
+  Carbu.setCharacterSize(SCRWIDTH/50);
   for (int i = 0; i < n; i++)
   {
     text[i].setCharacterSize(SCRWIDTH/500);
@@ -423,11 +430,15 @@ void Game0(RenderWindow& window, Music& music)
 
       if (Keyboard::isKeyPressed(Keyboard::Space))
       {
-        S(2,n-1)+=Acc*cos(2*M_PI*sp[n-1].getRotation()/360);
-        S(3,n-1)+=Acc*sin(2*M_PI*sp[n-1].getRotation()/360);
-        sp[n-1].setTexture(Fire);
-        if (trust.getStatus() == Music::Stopped) trust.play();
-
+        if(T > 0 and Acc != 0)
+        {
+          S(2,n-1)+=Acc*cos(2*M_PI*sp[n-1].getRotation()/360);
+          S(3,n-1)+=Acc*sin(2*M_PI*sp[n-1].getRotation()/360);
+          sp[n-1].setTexture(Fire);
+          if (trust.getStatus() == Music::Stopped) trust.play();
+          T -= Acc/20;
+        }
+        if(T < 0) T = 0;
       }
       else
       {
@@ -469,8 +480,12 @@ void Game0(RenderWindow& window, Music& music)
     Acce.str("");
     Acce << "Propulsseur : " << endl << Acc << " m/s²";
     Prop.setString(Acce.str().c_str());
+    Carb.str("");
+    Carb << "Carburant : " << endl << T << " Kg";
+    Carbu.setString(Carb.str().c_str());
     window.draw(vit);
     window.draw(Prop);
+    window.draw(Carbu);
     window.display();
 
     for(int i = 0; i < I_max; i++)
@@ -555,9 +570,9 @@ void Game1(RenderWindow& window, Music& music)
   int SCRWIDTH, SCRHEIGHT;
   SCRWIDTH = window.getSize().x;
   SCRHEIGHT = window.getSize().y;
-  vit.setPosition(SCRWIDTH/2,9*SCRHEIGHT/20);
+  vit.setPosition(SCRWIDTH/2,7*SCRHEIGHT/20);
   vit.setCharacterSize(SCRWIDTH/50);
-  Prop.setPosition(SCRWIDTH/2,11*SCRHEIGHT/20);
+  Prop.setPosition(SCRWIDTH/2,9*SCRHEIGHT/20);
   Prop.setCharacterSize(SCRWIDTH/50);
   for (int i = 0; i < n; i++)
   {
@@ -699,11 +714,13 @@ void Game1(RenderWindow& window, Music& music)
 
       if (Keyboard::isKeyPressed(Keyboard::Space))
       {
-        S(2,n-1)+=Acc*cos(2*M_PI*sp[n-1].getRotation()/360);
-        S(3,n-1)+=Acc*sin(2*M_PI*sp[n-1].getRotation()/360);
-        sp[n-1].setTexture(Fire);
-        if (trust.getStatus() == Music::Stopped) trust.play();
-
+        if(Acc > 0)
+        {
+          S(2,n-1)+=Acc*cos(2*M_PI*sp[n-1].getRotation()/360);
+          S(3,n-1)+=Acc*sin(2*M_PI*sp[n-1].getRotation()/360);
+          sp[n-1].setTexture(Fire);
+          if (trust.getStatus() == Music::Stopped) trust.play();
+        }
       }
       else
       {
@@ -745,6 +762,7 @@ void Game1(RenderWindow& window, Music& music)
     Acce.str("");
     Acce << "Propulsseur : " << endl << Acc << " m/s²";
     Prop.setString(Acce.str().c_str());
+
     window.draw(vit);
     window.draw(Prop);
     window.display();
@@ -756,6 +774,74 @@ void Game1(RenderWindow& window, Music& music)
   }
 }
 
-void Game2(RenderWindow& window, Music& music)
+void Game2(RenderWindow& window,Music& music)
 {
+  Music WC;
+  WC.openFromFile("Assets/Musique/WCend.wav");
+  WC.setLoop(true);
+  music.stop();
+  WC.play();
+  Font Font1;
+  Font1.loadFromFile("./Assets/EarthOrbiter/earthorbiter.ttf");
+
+  Text Prop[10];
+  for (int i = 0; i < 10; i++)
+  {
+    Prop[i].setFont(Font1);
+  }
+  Prop[0].setString("Cree par : Francoit Puel & Yohan Duarte");
+  Prop[1].setString("Prochainement, une nouvelle version \n avec des musiques libres de droits");
+  Prop[2].setString("===Commandes du jeu===");
+  Prop[3].setString("Fleche droite & gauche : angle du vaisseau \n Fleches haut & bas : puissance du propulseur");
+  Prop[4].setString("Chiffres de 1 a 8 : vitesse de la simulation \n");
+  Prop[5].setString(" A & Z : le zoom \n R : le vaisseau s'oriente dans \n le sens contraire à sa vitesse");
+  Prop[6].setString("Remerciements :");
+  Prop[7].setString("CurieOsity (toujours), Les insomnies, \n L'UE de physique numerique de L3");
+  Prop[8].setString("l'oeuvre de Stanley Kubrick et d'Arthur C. Clarke \n Chrono Triger le meilleur RPG sur super NES");
+  Prop[9].setString("Les memes pour les easter eggs");
+
+  int SCRWIDTH, SCRHEIGHT;
+  SCRWIDTH = window.getSize().x;
+  SCRHEIGHT = window.getSize().y;
+
+  FloatRect textRect;
+
+  for (int i = 0; i < 10; i++)
+  {
+    Prop[i].setCharacterSize(SCRWIDTH/30);
+    Prop[i].setOutlineThickness(100);
+    textRect = Prop[i].getLocalBounds();
+    Prop[i].setOrigin(textRect.left + textRect.width/2.0f,
+                    textRect.top  + textRect.height/2.0f);
+    Prop[i].setPosition(SCRWIDTH/2.0f,SCRHEIGHT*(1+i)/4.0f);
+    Prop[i].setFillColor(Color::White);
+    Prop[i].setStyle(Text::Regular);
+  }
+  int j = 0;
+  while (window.isOpen())
+  {
+    if (Keyboard::isKeyPressed(Keyboard::Escape))
+    {
+      window.close();
+      return;
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+    {
+      if(j < 0) j++;
+    }
+    if (Keyboard::isKeyPressed(sf::Keyboard::Down))
+    {
+      j = (j-1)%8;
+    }
+
+
+    window.clear(Color::Black);
+    for (int i = 0; i < 10; i++)
+    {
+      Prop[i].setPosition(SCRWIDTH/2.0f,SCRHEIGHT*(1+j+i)/4.0f);
+      window.draw(Prop[i]);
+    }
+    window.display();
+    usleep(200000);
+  }
 }
