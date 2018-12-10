@@ -284,11 +284,11 @@ void Game0(RenderWindow& window, Music& music)
   int SCRWIDTH, SCRHEIGHT;
   SCRWIDTH = window.getSize().x;
   SCRHEIGHT = window.getSize().y;
-  vit.setPosition(SCRWIDTH/2,7*SCRHEIGHT/20);
+  vit.setPosition(6.5*SCRWIDTH/20,4*SCRHEIGHT/20);
   vit.setCharacterSize(SCRWIDTH/50);
-  Prop.setPosition(SCRWIDTH/2,9*SCRHEIGHT/20);
+  Prop.setPosition(6.5*SCRWIDTH/20,6*SCRHEIGHT/20);
   Prop.setCharacterSize(SCRWIDTH/50);
-  Carbu.setPosition(SCRWIDTH/2,11*SCRHEIGHT/20);
+  Carbu.setPosition(6.5*SCRWIDTH/20,8*SCRHEIGHT/20);
   Carbu.setCharacterSize(SCRWIDTH/50);
   for (int i = 0; i < n; i++)
   {
@@ -330,7 +330,7 @@ void Game0(RenderWindow& window, Music& music)
   }
 
   View view1(sf::Vector2f(0,0),sf::Vector2f(1900*2.5,1008*2.5));
-  View view2(sf::Vector2f(0,0),sf::Vector2f(1900,1008));
+  View view2(sf::Vector2f(0,0),sf::Vector2f(SCRWIDTH,SCRHEIGHT));
   View minimapView(sf::Vector2f(0,0),sf::Vector2f(19000,10080));
   minimapView.setViewport(sf::FloatRect(0.5f, 0.f, 0.5f, 0.5f));
 
@@ -570,9 +570,9 @@ void Game1(RenderWindow& window, Music& music)
   int SCRWIDTH, SCRHEIGHT;
   SCRWIDTH = window.getSize().x;
   SCRHEIGHT = window.getSize().y;
-  vit.setPosition(SCRWIDTH/2,7*SCRHEIGHT/20);
+  vit.setPosition(6.5*SCRWIDTH/20,6*SCRHEIGHT/20);
   vit.setCharacterSize(SCRWIDTH/50);
-  Prop.setPosition(SCRWIDTH/2,9*SCRHEIGHT/20);
+  Prop.setPosition(6.5*SCRWIDTH/20,8*SCRHEIGHT/20);
   Prop.setCharacterSize(SCRWIDTH/50);
   for (int i = 0; i < n; i++)
   {
@@ -614,7 +614,7 @@ void Game1(RenderWindow& window, Music& music)
   }
 
   View view1(sf::Vector2f(0,0),sf::Vector2f(1900*2.5,1008*2.5));
-  View view2(sf::Vector2f(0,0),sf::Vector2f(1900,1008));
+  View view2(sf::Vector2f(0,0),sf::Vector2f(SCRWIDTH,SCRHEIGHT));
   View minimapView(sf::Vector2f(0,0),sf::Vector2f(19000,10080));
   minimapView.setViewport(sf::FloatRect(0.5f, 0.f, 0.5f, 0.5f));
 
