@@ -17,7 +17,7 @@
 \begin{document}
 \maketitle
 \begin{abstract}
-Dans le cadre du projet de l'unitée d'enseignement de physique numérique
+Dans le cadre du projet de l'unitée d'enseignement de physique numérique.
 De la description d'un système à N corps à sa résolution numérique dans le but de l'implémenter dans un jeu vidéo.
 \end{abstract}
 
@@ -135,9 +135,15 @@ Nous l'avons implémenté avec Heingen
 \caption{RK4.hpp \label{fig:code}}
 \end{figure}
 
-\subsection{Jeu}
-
-Le jeu utilise le code du problème à n corps pour mettre en scène un vaisseau que l'on peut guider dans le système solaire en modifiant la vitesse de celui-ci en le propulsant.
+\subsection{Le Jeu}
+Le jeu nommé 2001 A Space Odyssey ou 2001ASO (en reference a l'oeuvre Stanley Kubrick et Arthur C. Clarke).
+Le jeu utilise le code du problème à n corps pour mettre en scène le discovery one que l'on peut guider dans le système solaire en modifiant la vitesse de celui-ci en le propulsant.
+\begin{figure}[h]
+\centering
+\includegraphics[width=.5\textwidth]{ecrandemarage.png}
+\caption{Écran de démarage\label{fig:Écran}}
+\end{figure}
+Toute la partie graphique est faite grâce à la librairie SFML
 
 \newpage
 
@@ -151,7 +157,7 @@ Nous considérons un système à deux corps , tout deux ayant la masse équivale
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=\textwidth]{2.png}
+\includegraphics[width=.9\textwidth]{2.png}
 \caption{Orbite des deux corps}
 \end{figure}
 

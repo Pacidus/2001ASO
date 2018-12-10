@@ -29,10 +29,11 @@ int main()
   usleep(250000);
   window.clear(Color::Black);
   j = CScreen(window, sound);
+
   sound.play();
-  if(j == 0) Game0(window);
-  if(j == 1) Game1(window);
-  if(j == 2) Game2(window);
+  if(j == 0) Game0(window,music);
+  if(j == 2) Game1(window,music);
+  if(j == 1) Game2(window,music);
 
   return 0;
 }
