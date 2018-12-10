@@ -150,7 +150,7 @@ Le jeu utilise le code du problème à n corps pour mettre en scène le discover
 Toute la partie graphique est faite grâce à la librairie SFML
 
 Les contrôles son expliqué dans les crédits du jeu.
-Deux modes jouables sont proposée
+Deux modes jouables sont proposées.
 \newpage
 
 \section{Discussions sur les limites du modèle}
