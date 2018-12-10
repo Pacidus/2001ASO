@@ -225,10 +225,10 @@ void Game0(RenderWindow& window, Music& music)
            0,-0.0247028303185/86400, 0.0194037752153/86400,-0.0035087020323/86400, -0.0034406819679/86400,0.0054827478504/86400,-0.0038751868420/86400, -0.0002276932226/86400, -0.0015284677821/86400, 0;
 
   S *= 1.49597870e11;
-  S(0,9) = ((S(0,4)-S(0,3))/50)+S(0,3);
-  S(1,9) = ((S(1,4)-S(1,3))/50)+S(1,3);
-  S(2,9) = ((S(2,4)-S(2,3))*7)+S(2,3);
-  S(3,9) = ((S(3,4)-S(3,3))*7)+S(3,3);
+  S(0,9) = ((S(0,4)-S(0,3))/70)+S(0,3);
+  S(1,9) = ((S(1,4)-S(1,3))/70)+S(1,3);
+  S(2,9) = ((S(2,4)-S(2,3))*8)+S(2,3);
+  S(3,9) = ((S(3,4)-S(3,3))*8)+S(3,3);
   M << 1.9891e30, 3.3011e23, 4.8685e24, 5.9736e24, 7.3477e22, 6.4185e23, 1.8986e27,5.6846e26,8.6810e25, 419.725;
 
   Save(M,S);
@@ -322,7 +322,7 @@ void Game0(RenderWindow& window, Music& music)
                       sp[i+n].getLocalBounds().width/2.f );
   }
 
-  View view1(sf::Vector2f(0,0),sf::Vector2f(1900/15,1008/15));
+  View view1(sf::Vector2f(0,0),sf::Vector2f(1900*2.5,1008*2.5));
   View view2(sf::Vector2f(0,0),sf::Vector2f(1900,1008));
   View minimapView(sf::Vector2f(0,0),sf::Vector2f(19000,10080));
   minimapView.setViewport(sf::FloatRect(0.5f, 0.f, 0.5f, 0.5f));
@@ -397,6 +397,13 @@ void Game0(RenderWindow& window, Music& music)
       {
         view1.zoom(1.5f);
       }
+      if (Keyboard::isKeyPressed(Keyboard::R))
+      {
+        x = S(2,n-1);
+        y = S(3,n-1);
+        theta = 360*atan(y/(sqrt(x*x+y*y)+x))/M_PI;
+        sp[n-1].setRotation(180+theta);
+      }
       if (Keyboard::isKeyPressed(Keyboard::Left))
       {
         sp[n-1].rotate(-4);
@@ -407,7 +414,7 @@ void Game0(RenderWindow& window, Music& music)
       }
       if (Keyboard::isKeyPressed(Keyboard::Up))
       {
-        if(Acc < 100) Acc+=0.5;
+        if(Acc < 10) Acc+=0.5;
       }
       if (Keyboard::isKeyPressed(Keyboard::Right))
       {
@@ -494,10 +501,10 @@ void Game1(RenderWindow& window, Music& music)
            0,-0.0247028303185/86400, 0.0194037752153/86400,-0.0035087020323/86400, -0.0034406819679/86400,0.0054827478504/86400,-0.0038751868420/86400, -0.0002276932226/86400, -0.0015284677821/86400, 0;
 
   S *= 1.49597870e11;
-  S(0,9) = ((S(0,4)-S(0,3))/50)+S(0,3);
-  S(1,9) = ((S(1,4)-S(1,3))/50)+S(1,3);
-  S(2,9) = ((S(2,4)-S(2,3))*7)+S(2,3);
-  S(3,9) = ((S(3,4)-S(3,3))*7)+S(3,3);
+  S(0,9) = ((S(0,4)-S(0,3))/70)+S(0,3);
+  S(1,9) = ((S(1,4)-S(1,3))/70)+S(1,3);
+  S(2,9) = ((S(2,4)-S(2,3))*8)+S(2,3);
+  S(3,9) = ((S(3,4)-S(3,3))*8)+S(3,3);
   M << 1.9891e30, 3.3011e23, 4.8685e24, 5.9736e24, 7.3477e22, 6.4185e23, 1.8986e27,5.6846e26,8.6810e25, 419.725;
 
   Save(M,S);
@@ -591,7 +598,7 @@ void Game1(RenderWindow& window, Music& music)
                       sp[i+n].getLocalBounds().width/2.f );
   }
 
-  View view1(sf::Vector2f(0,0),sf::Vector2f(1900/15,1008/15));
+  View view1(sf::Vector2f(0,0),sf::Vector2f(1900*2.5,1008*2.5));
   View view2(sf::Vector2f(0,0),sf::Vector2f(1900,1008));
   View minimapView(sf::Vector2f(0,0),sf::Vector2f(19000,10080));
   minimapView.setViewport(sf::FloatRect(0.5f, 0.f, 0.5f, 0.5f));
@@ -666,17 +673,24 @@ void Game1(RenderWindow& window, Music& music)
       {
         view1.zoom(1.5f);
       }
+      if (Keyboard::isKeyPressed(Keyboard::R))
+      {
+        x = S(2,n-1);
+        y = S(3,n-1);
+        theta = 360*atan(y/(sqrt(x*x+y*y)+x))/M_PI;
+        sp[n-1].setRotation(180+theta);
+      }
       if (Keyboard::isKeyPressed(Keyboard::Left))
       {
         sp[n-1].rotate(-4);
       }
       if (Keyboard::isKeyPressed(Keyboard::Down))
       {
-        if(Acc > 0) Acc=-1+Acc/1.5;
+        if(Acc > 1) Acc=-1+Acc/1.01;
       }
       if (Keyboard::isKeyPressed(Keyboard::Up))
       {
-        Acc=1.5+1.5*Acc;
+        Acc=1.01+1.01*Acc;
       }
       if (Keyboard::isKeyPressed(Keyboard::Right))
       {
